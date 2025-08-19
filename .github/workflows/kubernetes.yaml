@@ -17,4 +17,4 @@ jobs:
             - name: Scan repo with kube-linter
               uses: stackrox/kube-linter-action@v1.0.4
               with:
-                directory: clusters/development/graphql-service.yaml
+                directory: charts
