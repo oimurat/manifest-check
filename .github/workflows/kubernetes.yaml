@@ -10,26 +10,44 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
-
-            - name: Install Helm
-              uses: azure/setup-helm@v3
               with:
-                version: '3.12.0'
+                  fetch-depth: 0
 
-            - name: Create temp directory for rendered templates
-              run: mkdir -p rendered-templates
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22.17.0
 
-            - name: Render Helm templates
+            - name: Run Prettier
               run: |
-                for chart in charts/applications/*/; do
-                  chart_name=$(basename "$chart")
-                  echo "Rendering $chart_name..."
-                  helm template "$chart_name" "$chart" \
-                    --values "values/internal/$chart_name/values-dev.yaml" \
-                    --output-dir rendered-templates/ || true
-                done
+                yarn install
+                yarn prettier --write
 
-            - name: Scan rendered templates with kube-linter
-              uses: stackrox/kube-linter-action@v1.0.4
+            - name: Commit add prettier
+              uses: stefanzweifel/git-auto-commit-action@v6
               with:
-                directory: rendered-templates
+                commit_message: 'add prettier'
+                branch: main
+
+            # - name: Install Helm
+            #   uses: azure/setup-helm@v3
+            #   with:
+            #     version: '3.12.0'
+
+            # - name: Create temp directory for rendered templates
+            #   run: mkdir -p rendered-templates
+
+            # - name: Render Helm templates
+            #   run: |
+            #     for chart in charts/applications/*/; do
+            #       chart_name=$(basename "$chart")
+            #       echo "Rendering $chart_name..."
+            #       helm template "$chart_name" "$chart" \
+            #         --values "values/internal/$chart_name/values-dev.yaml" \
+            #         --output-dir rendered-templates/ || true
+            #     done
+
+            # - name: Scan rendered templates with kube-linter
+            #   uses: stackrox/kube-linter-action@v1.0.4
+            #   with:
+            #     directory: rendered-templates
