@@ -62,5 +62,4 @@ jobs:
               uses: stefanzweifel/git-auto-commit-action@v6
               with:
                   commit_message: "add:prettier"
-                  branch: feature/**
                   file_pattern: "**/*.yaml"
