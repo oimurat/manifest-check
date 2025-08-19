@@ -1,10 +1,10 @@
 name: kubernetes-check
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - 'feature/**'
+    workflow_dispatch:
+    push:
+        branches:
+            - "feature/**"
 
 permissions:
     contents: write
