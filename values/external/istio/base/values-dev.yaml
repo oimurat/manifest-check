@@ -1,2 +1,2 @@
 base:
-   enableIstioConfigCRDs: false
+  enableIstioConfigCRDs: false

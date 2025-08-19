@@ -1,15 +1,15 @@
 deployment:
-    name: kafka-worker
-    replicaCount: 2
-    env:
-        bootstrapServers: kafka-service:9092
-    image:
-        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:kafka-worker-v2
+  name: kafka-worker
+  replicaCount: 2
+  env:
+    bootstrapServers: kafka-service:9092
+  image:
+    name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:kafka-worker-v2
 service:
-    name: kafka-worker
-    ports:
-        protocol: TCP
-        port: 8080
-        targetPort: 8080
+  name: kafka-worker
+  ports:
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
 selector:
-    app: kafka-worker
+  app: kafka-worker

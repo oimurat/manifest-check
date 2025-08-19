@@ -15,7 +15,7 @@ spec:
             url: https://152.70.103.225:6443
   template:
     metadata:
-      name: '{{cluster}}-kube-prometheus-stack'
+      name: "{{cluster}}-kube-prometheus-stack"
     spec:
       project: default
       sources:
@@ -29,7 +29,7 @@ spec:
           targetRevision: main
           ref: values
       destination:
-        server: '{{url}}'
+        server: "{{url}}"
         namespace: monitoring
       syncPolicy:
         automated:

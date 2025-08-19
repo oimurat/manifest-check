@@ -13,16 +13,16 @@ deployment:
           oci-native-ingress.oraclecloud.com/https-listener-port: "443"
       spec:
         rules:
-        - host: kiali.mgmt.ec-gaihan-development.com
-          http:
-            paths:
-              - path: /
-                pathType: Prefix
-                backend:
-                  service:
-                    name: kiali
-                    port:
-                      number: 20001
+          - host: kiali.mgmt.ec-gaihan-development.com
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: kiali
+                      port:
+                        number: 20001
         kubernetes_config:
           cluster_name: cluster1
   resources:

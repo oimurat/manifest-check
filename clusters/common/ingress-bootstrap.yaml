@@ -13,11 +13,11 @@ spec:
             url: https://152.70.103.225:6443
   template:
     metadata:
-      name: '{{cluster}}-ingress-bootstrap'
+      name: "{{cluster}}-ingress-bootstrap"
     spec:
       project: default
       destination:
-        server: '{{url}}'
+        server: "{{url}}"
         namespace: default
       source:
         repoURL: https://github.com/yoshikanes/helm-chart.git
