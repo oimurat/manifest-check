@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.selector.app }}
+  name: {{ .Values.deployment.name }}
+  namespace: microservices
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.selector.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.selector.app }}
+    spec:
+      containers:
+        - env:
+            - name: RABBITMQ_DEFAULT_PASS
+              value: {{ .Values.deployment.env.defaultPass }}
+            - name: RABBITMQ_DEFAULT_USER
+              value: {{ .Values.deployment.env.defaultUser }}
+          image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.tag }}
+          name: {{ .Values.deployment.name }}
+          ports:
+            - containerPort: {{ .Values.deployment.ports.subContainerPort }}
+              protocol: {{ .Values.deployment.ports.protocol }}
+            - containerPort: {{ .Values.deployment.ports.mainContainerPort }}
+              protocol: {{ .Values.deployment.ports.protocol }}

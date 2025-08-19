@@ -1,0 +1,52 @@
+podAnnotations: 
+  proxy.istio.io/config: |
+    proxyMetadata:
+      ISTIO_META_DNS_CAPTURE: "true"
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 150m
+    memory: 128Mi
+cni:
+  enabled: true
+env:
+  ENABLE_MULTICLUSTER_HEADLESS: true
+  PILOT_ENABLE_EDS_FOR_HEADLESS_SERVICES: true
+meshConfig:
+  defaultConfig:
+    proxyMetadata:
+      ISTIO_META_DNS_CAPTURE: "true"
+global:
+  proxy:
+    logLevel: debug
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
+  proxy_init:
+    image: proxyv2
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
+  waypoint:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
+  meshID: "mesh1"
+  multiCluster:
+    enabled: true
+    clusterName: "cluster2"
+  network: "network2"

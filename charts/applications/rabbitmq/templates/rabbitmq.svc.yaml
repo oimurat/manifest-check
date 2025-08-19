@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.selector.app }}
+  name: {{ .Values.service.name }}
+  namespace: microservices
+spec:
+  ports:
+    - name: {{ .Values.service.ports.subPortName }}
+      port: {{ .Values.service.ports.subPort }}
+      targetPort: {{ .Values.service.ports.subTargetPort }}
+    - name: {{ .Values.service.ports.mainPortName }}
+      port: {{ .Values.service.ports.mainPort }}
+      targetPort: {{ .Values.service.ports.mainTargetPort }}
+  selector:
+    app: {{ .Values.selector.app }}

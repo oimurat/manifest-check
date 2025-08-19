@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.selector.app }}
+  name: {{ .Values.deployment.name }}
+  namespace: microservices
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.selector.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.selector.app }}
+    spec:
+      containers:
+        - env:
+            - name: APP_PORT
+              value: {{ .Values.deployment.env.appPort | quote }}
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: {{ .Values.deployment.env.bootstrapServers }}
+          image: {{ .Values.deployment.image.name }}
+          name: {{ .Values.deployment.name }}
+          ports:
+            - containerPort: {{ .Values.deployment.ports.containerPort }}
+              protocol: {{ .Values.deployment.ports.protocol }}
