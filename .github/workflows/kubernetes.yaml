@@ -1,6 +1,10 @@
 name: kubernetes-check
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'feature/**'
 
 permissions:
     contents: write
@@ -57,6 +61,6 @@ jobs:
             - name: Commit add prettier
               uses: stefanzweifel/git-auto-commit-action@v6
               with:
-                  commit_message: "add prettier"
-                  branch: main
+                  commit_message: "add:prettier"
+                  branch: feature/**
                   file_pattern: "**/*.yaml"
