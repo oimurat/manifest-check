@@ -11,7 +11,25 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Scan repo with kube-linter
+            - name: Install Helm
+              uses: azure/setup-helm@v3
+              with:
+                version: '3.12.0'
+
+            - name: Create temp directory for rendered templates
+              run: mkdir -p rendered-templates
+
+            - name: Render Helm templates
+              run: |
+                for chart in charts/applications/*/; do
+                  chart_name=$(basename "$chart")
+                  echo "Rendering $chart_name..."
+                  helm template "$chart_name" "$chart" \
+                    --values "values/internal/$chart_name/values-dev.yaml" \
+                    --output-dir rendered-templates/ || true
+                done
+
+            - name: Scan rendered templates with kube-linter
               uses: stackrox/kube-linter-action@v1.0.4
               with:
-                directory: charts
+                directory: rendered-templates
