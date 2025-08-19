@@ -51,9 +51,9 @@ loki:
   ingress:
     enabled: true
     annotations:
-      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq"
-      oci-native-ingress.oraclecloud.com/backend-tls-enabled: "false"
-      oci-native-ingress.oraclecloud.com/https-listener-port: "443"
+      oci-native-ingress.oraclecloud.com/certificate-ocid: 'ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq'
+      oci-native-ingress.oraclecloud.com/backend-tls-enabled: 'false'
+      oci-native-ingress.oraclecloud.com/https-listener-port: '443'
     ingressClassName: native-ic-ingress-class
     hosts:
       - host: loki.dev.ec-gaihan-development.com

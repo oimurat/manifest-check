@@ -13,7 +13,7 @@ spec:
             url: https://152.70.103.225:6443
   template:
     metadata:
-      name: "{{cluster}}-cert-manager"
+      name: '{{cluster}}-cert-manager'
     spec:
       project: default
       source:
@@ -23,9 +23,9 @@ spec:
         helm:
           parameters:
             - name: installCRDs
-              value: "true"
+              value: 'true'
       destination:
-        server: "{{url}}"
+        server: '{{url}}'
         namespace: cert-manager
       syncPolicy:
         automated:

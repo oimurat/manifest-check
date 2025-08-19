@@ -8,11 +8,11 @@ deployment:
     protocol: TCP
   resources:
     requests:
-      cpu: "100m"
-      memory: "64Mi"
+      cpu: '100m'
+      memory: '64Mi'
     limits:
-      cpu: "150m"
-      memory: "128Mi"
+      cpu: '150m'
+      memory: '128Mi'
 service:
   name: grpc-cart-service
   ports:

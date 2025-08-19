@@ -13,7 +13,7 @@ spec:
             url: https://152.70.103.225:6443
   template:
     metadata:
-      name: "{{cluster}}-ingress-controller"
+      name: '{{cluster}}-ingress-controller'
     spec:
       project: default
       sources:
@@ -28,7 +28,7 @@ spec:
           targetRevision: main
           ref: values
       destination:
-        server: "{{url}}"
+        server: '{{url}}'
         namespace: native-ingress-controller-system
       syncPolicy:
         automated:

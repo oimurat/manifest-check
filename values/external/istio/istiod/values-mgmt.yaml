@@ -17,7 +17,7 @@ env:
 meshConfig:
   defaultConfig:
     proxyMetadata:
-      ISTIO_META_DNS_CAPTURE: "true"
+      ISTIO_META_DNS_CAPTURE: 'true'
 global:
   proxy:
     logLevel: debug
@@ -45,8 +45,8 @@ global:
       limits:
         cpu: 150m
         memory: 128Mi
-  meshID: "mesh1"
+  meshID: 'mesh1'
   multiCluster:
     enabled: true
-    clusterName: "cluster1"
-  network: "network1"
+    clusterName: 'cluster1'
+  network: 'network1'
