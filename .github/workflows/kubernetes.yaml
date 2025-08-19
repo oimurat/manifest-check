@@ -20,14 +20,20 @@ jobs:
 
             - name: Run Prettier
               run: |
+                echo '{
+                  "devDependencies": {
+                    "prettier": "^3.2.5"
+                  }
+                }' > package.json
                 yarn install
-                yarn prettier --write
+                yarn prettier --write "**/*.yaml"
 
-            - name: Commit add prettier
-              uses: stefanzweifel/git-auto-commit-action@v6
-              with:
-                commit_message: 'add prettier'
-                branch: main
+            # - name: Commit add prettier
+            #   uses: stefanzweifel/git-auto-commit-action@v6
+            #   with:
+            #     commit_message: 'add prettier'
+            #     branch: main
+            #     file_pattern: '**/*.yaml'
 
             # - name: Install Helm
             #   uses: azure/setup-helm@v3
