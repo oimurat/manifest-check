@@ -1,5 +1,5 @@
-name: "istio-eastwestgateway"
-networkGateway: "network1"
+name: 'istio-eastwestgateway'
+networkGateway: 'network1'
 resources:
   limits:
     cpu: 150m
