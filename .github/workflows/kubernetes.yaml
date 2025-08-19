@@ -1,0 +1,17 @@
+name: kubernetes-check
+
+on: workflow_dispatch
+
+jobs:
+    kubernetes-check:
+        name: kubernetes-check
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Scan repo with kube-linter
+              uses: stackrox/kube-linter-action@v1.0.4
+              with:
+                directory: charts
