@@ -11,10 +11,26 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: List files in the repository
-              run: ls -R
-
-            - name: Scan repo with kube-linter
-              uses: stackrox/kube-linter-action@v1.0.4
+            - name: Set up Helm
+              uses: azure/setup-helm@v4
               with:
-                directory: charts
+                version: v3.12.0 # Use a specific Helm version
+
+            - name: Set up KubeLinter binary
+              uses: stackrox/kube-linter-action@v1.0.4
+              id: kube-linter-setup # 後でコマンドパスを参照するためIDを付与
+
+            - name: Lint all Helm charts
+              run: |
+                # 'charts'配下のすべてのチャートディレクトリを検索
+                # findコマンドでChart.yamlがあるディレクトリを探し、ループ処理する
+                find ./charts -name "Chart.yaml" -exec dirname {} \; | while read chart_dir; do
+                  echo "--- Linting chart: ${chart_dir} ---"
+
+                  # helm templateでYAMLを生成し、パイプ(|)でkube-linterの標準入力に渡す
+                  # valuesファイルが存在すればそれも適用する（この部分はプロジェクトに合わせて調整してください）
+                  helm template "${chart_dir}" | ${{ steps.kube-linter-setup.outputs.path }} lint -
+
+                  echo "--- Finished linting ${chart_dir} ---"
+                  echo ""
+                done
